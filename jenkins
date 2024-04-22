@@ -1,0 +1,15 @@
+pipeline{
+  agent any
+      stages{
+        stage("checkout"){
+          steps{
+              checkout scm
+          }
+        }
+        stage("deployment"){
+          steps{
+          sh "sudo  docker build . -t dd/server"
+          sh "sudo docker run -d -p 80:80 haidar/server"
+        }
+      }
+}
